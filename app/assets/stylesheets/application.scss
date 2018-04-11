@@ -19,7 +19,20 @@
 
 .masthead {
   background: image-url("home-bg.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 550px;
+  width: 100%;
 }
+
+.brand-logo {
+  height: 53px;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit ;
+}
+
 .navbar-default {
   background-color: rgba(0, 0, 0, 0.0001) !important;
   border-color: rgba(0, 0, 0, 0.0001) !important;
@@ -39,4 +52,8 @@
 .navbar-default
 .navbar-brand {
   color: #0184a0 !important;
+}
+
+.table-info {
+  background-color: #0184a0 !important;
 }

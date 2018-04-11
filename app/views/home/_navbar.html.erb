@@ -1,0 +1,45 @@
+<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsable">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= image_tag "Bugzilla.png", class: 'brand-logo' %>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapsable">
+      <ul class="nav navbar-nav foo" id="menu">
+        <li><a class="navbar-default-a" href="/">Home</a></li>
+        <li><a href="/about-us">About Us</a></li>
+        <li>
+          <a class="navbar-default-a" href="/contact">
+            <span class='glyphicon glyphicon-hand-right'></span>
+            Contact Us!
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stuff <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header navbar-default-a">Great stuff!</li>
+            <li><a href="/one">One</a></li>
+            <li><a href="/two">Two</a></li>
+            <li><a href="/three">Three</a></li>
+            <li class="divider"></li>
+            <li><a href="/admin">Admin Dashboard</a></li>
+            <li><a href="/admin/users">Users</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-default-a navbar-right" align="right">
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn' %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: 'btn' %>
+          <%= link_to "Sign Up", new_user_registration_path, class: 'btn' %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
