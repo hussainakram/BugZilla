@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @bug.title %>
-</p>
+  <h3>
+    <strong>Title:</strong>
+    <%= @bug.title %>
+  </h3>
 
-<p>
-  <strong>Description:</strong>
-  <%= @bug.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @bug.description %>
+  </p>
 
-<p>
-  <strong>Deadline:</strong>
-  <%= @bug.deadline %>
-</p>
+  <p>
+    <strong>Deadline:</strong>
+    <%= @bug.deadline %>
+  </p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @bug.type %>
-</p>
+  <p>
+    <strong>Type:</strong>
+    <%= @bug.bug_type %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @bug.status %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @bug.status %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @bug.user %>
-</p>
+  <p>
+    <strong>User:</strong>
+    <%= @bug.user.name %>
+  </p>
 
-<p>
-  <strong>Project:</strong>
-  <%= @bug.project %>
-</p>
+  <p>
+    <strong>Project:</strong>
+    <%= @bug.project.name %>
+  </p>
 
-<%= link_to 'Edit', edit_bug_path(@bug) %> |
-<%= link_to 'Back', bugs_path %>
+  <%= link_to 'Edit', edit_bug_path(@bug) %> |
+
+</div>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :projects do
-    resources :bugs
+  shallow do
+    resources :projects do
+      resources :bugs
+    end
   end
   root 'home#index'
   get 'home/index'

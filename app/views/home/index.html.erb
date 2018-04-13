@@ -1,5 +1,4 @@
 <%= render partial: "navbar", class: 'col-md-offset-0' %>
-    <!-- Page Header -->
     <header class="masthead">
       <div class="overlay"></div>
       <div class="container">
@@ -8,7 +7,7 @@
             <div class="site-heading">
               <h1>BugZilla</h1>
               <span class="subheading">A Bug Tracking System</span>
-              <br>
+              <hr>
               <% if user_signed_in? %>
                 <%= link_to "Create Project", new_project_path, class: 'btn btn-primary' %>
                 <%= link_to "Show Projects", projects_path, class: 'btn btn-primary'%>
@@ -20,7 +19,3 @@
         </div>
       </div>
     </header>
-
-    <hr>
-  <%= render partial: "footer", class: 'col-md-offset-0' %>
-    <!-- Footer -->

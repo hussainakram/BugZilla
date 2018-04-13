@@ -4,17 +4,20 @@ class BugsController < ApplicationController
   # GET /bugs
   # GET /bugs.json
   def index
-    @bugs = Bug.all
+    @project = Project.find(params[:project_id])
+    @bugs = @project.bugs.all
   end
 
   # GET /bugs/1
   # GET /bugs/1.json
   def show
+    @bug = Bug.where(params[:id]).first
   end
 
   # GET /bugs/new
   def new
-    @bug = Bug.new
+    @project = Project.find(params[:project_id])
+    @bug = @project.bugs.new
   end
 
   # GET /bugs/1/edit
@@ -24,11 +27,12 @@ class BugsController < ApplicationController
   # POST /bugs
   # POST /bugs.json
   def create
-    @bug = Bug.new(bug_params)
+    @project = Project.find(params[:project_id])
+    @bug = @project.bugs.new(bug_params)
 
     respond_to do |format|
       if @bug.save
-        format.html { redirect_to @bug, notice: 'Bug was successfully created.' }
+        format.html { redirect_to project_bugs_path(@project.id), notice: 'Bug was successfully created.' }
         format.json { render :show, status: :created, location: @bug }
       else
         format.html { render :new }
@@ -69,6 +73,6 @@ class BugsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bug_params
-      params.require(:bug).permit(:title, :description, :deadline, :type, :status, :user_id, :project_id)
+      params.require(:bug).permit(:title, :description, :deadline, :bug_type, :status, :user_id, :project_id)
     end
 end

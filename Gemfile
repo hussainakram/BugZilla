@@ -35,8 +35,7 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.0'
 gem "font-awesome-rails"
 gem 'jquery-rails'
-gem "pundit"
-# Use Capistrano for deployment
+gem "pundit"# Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do

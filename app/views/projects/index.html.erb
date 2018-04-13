@@ -8,6 +8,7 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Bugs</th>
         <th colspan="3">Ations</th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
         <tr>
           <td><%= project.name %></td>
           <td><%= project.description %></td>
+          <td><%= link_to image_tag('bug.png', class: 'bug-image'), project_bugs_path(project) %></td>
           <td><%= link_to 'Show', project %></td>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>
           <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,5 +29,5 @@
 
   <br>
 
-  <%= link_to 'New Project', new_project_path %>
+  <%= link_to 'New Project', new_project_path, class: 'btn btn-warning' %>
 </div>
