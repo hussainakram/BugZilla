@@ -43,20 +43,20 @@
     <div class="row">
       <div class="field form-group col-md-2">
         <%= f.label :bug_type %>
-        <%= f.select(:bug_type, options_for_select([['Feature', 'feature'], ['Bug', 'bug']]), {}, {class: "form-control", id: 'bug_types'}) %>
+        <%= f.select(:bug_type, options_for_select([['Feature', 'feature'], ['Bug', 'bug']]), {}, {class: "bug_types form-control"}) %>
       </div>
     </div>
 
-    <div class="row" id="feature_status">
+    <div class="row feature_status">
     <div class="field form-group col-md-2">
-      <%= f.label :status %>
+      <%= f.label :feature_status %>
       <%= f.select(:status, options_for_select([['New', 'new'], ['Started', 'started'], ['Completed', 'completed']]), {}, {class: "form-control"}) %>
     </div>
   </div>
 
-  <div class="row" id="bug_status">
+  <div class="row bug_status">
     <div class="field form-group col-md-2">
-      <%= f.label :status %>
+      <%= f.label :bug_status %>
       <%= f.select(:status, options_for_select([['New', 'new'], ['Started', 'started'], ['Resolved', 'resolved']]), {}, {class: "form-control"}) %>
     </div>
   </div>
@@ -71,4 +71,3 @@
     </div>
   <% end %>
 </div>
-<%= console %>
