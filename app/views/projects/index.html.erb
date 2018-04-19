@@ -22,9 +22,9 @@
           <td><%= project.description %></td>
           <td><%= link_to image_tag('bug.png', class: 'bug-image'), project_bugs_path(project) %></td>
           <td>
-            <%= link_to 'Show', project %>
-            <%= link_to 'Edit', edit_project_path(project) if policy(project).update? %>
-            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %>
+            <%= link_to 'Show', project, class: 'btn btn-xs btn-default' %>
+            <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-xs btn-info' if policy(project).update? %>
+            <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' if policy(project).destroy? %>
           </td>
           <td> <%= link_to "", project_users_path(project.id), class: 'fa fa-users fa-lg' %> </td>
           <td><%= link_to_if current_user.manager?, "Invite User", new_user_invitation_path(project_id: project.id) %></td>

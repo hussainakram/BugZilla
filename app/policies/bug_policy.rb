@@ -6,23 +6,26 @@ class BugPolicy < ApplicationPolicy
   end
 
   class Scope < Scope
-     def resolve
-       if user.admin?
-         scope.all
-       else
-         scope.where(user_id: current_user.id)
-       end
-     end
-   end
+    def resolve
+      if user.admin?
+        scope.all
+      else
+        scope.where(user_id: current_user.id)
+      end
+    end
+  end
   def assign?
     user.developer?
   end
+
   def destroy?
-    user.manager? or user.qa?
+    user.manager? || user.qa?
   end
+
   def new?
-    user.manager? or user.qa?
+    user.manager? || user.qa?
   end
+
   def resolve?
     user.developer?
   end

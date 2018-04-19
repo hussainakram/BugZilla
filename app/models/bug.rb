@@ -9,18 +9,21 @@ class Bug < ApplicationRecord
   belongs_to :user
   belongs_to :project
   belongs_to :post, class_name: 'Bug'
-  has_many :comment, class_name: 'Bug', foreign_key: 'post_id'
+  has_many :comment, class_name: 'Bug', foreign_key: 'post_id', dependent: :destroy, inverse_of: :bug
 
   def assigned?
-    return self.assign_to.present?
+    assign_to.present?
   end
+
   def is_feature?
-    bug_type == "feature"
+    bug_type == 'feature'
   end
+
   def is_bug?
-    bug_type == "bug"
+    bug_type == 'bug'
   end
+
   def resolved?
-    status == "Resolved" || status == "Completed"
+    status == 'Resolved' || status == 'Completed'
   end
 end

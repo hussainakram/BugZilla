@@ -1,7 +1,7 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
-
-  <h1>Bugs</h1>
+  <h1><%= @project.name %></h1>
+  <h2>Bugs</h2>
 
   <table class="table responsive">
     <thead class= "table-info">
@@ -12,7 +12,6 @@
         <th>Type</th>
         <th>Status</th>
         <th>User</th>
-        <th>Project</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -26,11 +25,10 @@
           <td><%= bug.bug_type %></td>
           <td><%= bug.status %></td>
           <td><%= bug.user.display_name %></td>
-          <td><%= bug.project.name %></td>
           <td>
-            <%= link_to 'View', bug %>
-            <%= link_to 'Update', edit_bug_path(bug)%>
-            <%= link_to 'Delete', bug, method: :delete, data: { confirm: 'Are you sure?' } if policy(bug).destroy? %>
+            <%= link_to 'View', bug, class: 'btn btn-xs btn-default' %>
+            <%= link_to 'Update', edit_bug_path(bug), class: 'btn btn-xs btn-info'%>
+            <%= link_to 'Delete', bug, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' if policy(bug).destroy? %>
           </td>
         </tr>
       <% end %>

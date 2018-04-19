@@ -57,12 +57,13 @@
     </div>
   </div>
 
-    <div class="row" id="bug_statuses">
-      <div class="field form-group col-md-2">
-        <%= f.label :status %>
-        <%= f.select(:status, options_for_select([['New', 'new'], ['Started', 'started'], ['Resolved', 'resolved']]), {}, {class: "form-control"}) %>
-      </div>
+  <div class="row" id="bug_statuses">
+    <div class="field form-group col-md-2">
+      <%= f.label :status %>
+      <%= f.select(:status, options_for_select([['New', 'new'], ['Started', 'started'], ['Resolved', 'resolved']]), {}, {class: "form-control"}) %>
     </div>
+  </div>
+
   <div class="row">
     <div class="field form-group col-md-4">
       <%= f.hidden_field :user_id, value: current_user.id, class: 'form-control' %>

@@ -20,7 +20,9 @@
           <td><%= user.email %></td>
           <td><%= user.user_type %></td>
           <td>
-            <%= link_to 'Remove', @user_project, method: :delete, data: { confirm: 'Are you sure?' } if !user.manager? %>
+            <% if current_user.manager? %>
+              <%= link_to 'Remove', @user_project, method: :delete, data: { confirm: 'Are you sure?' } if !user.manager? %>
+            <% end %>
           </td>
         </tr>
       <% end %>

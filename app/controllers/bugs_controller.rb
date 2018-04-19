@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :set_bug, only: [:show, :edit, :update, :destroy]
+  before_action :set_bug, only: %i[show edit update destroy]
   # after_action :verify_authorized, except: :index
 
   # GET /bugs
@@ -21,9 +21,7 @@ class BugsController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @bug = @project.bugs.new
-    if params[:post_id].present?
-      @bug.post_id = params[:bug_id]
-    end
+    @bug.post_id = params[:bug_id] if params[:post_id].present?
   end
 
   # GET /bugs/1/edit
@@ -71,12 +69,11 @@ class BugsController < ApplicationController
     end
   end
 
-  def add_comment
-  end
+  def add_comment; end
 
   def assign
     @bug = Bug.find(params[:id])
-    @bug.update_column(:assign_to, current_user.id)
+    @bug.update(assign_to: current_user.id)
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Bug was has been assigned to you!' }
       format.json { head :no_content }
@@ -87,9 +84,9 @@ class BugsController < ApplicationController
     @bug = Bug.find(params[:id])
     authorize @bug
     if @bug.is_feature?
-      @bug.update_column(:status, "Completed")
+      @bug.update(status: 'Completed')
     elsif bug.is_bug?
-      @bug.update_column(:status, "Resolved")
+      @bug.update(status: 'Resolved')
     end
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Bug was has been resolved by you!' }
@@ -98,13 +95,15 @@ class BugsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bug
-      @bug = Bug.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def bug_params
-      params.require(:bug).permit(:title, :description, :avatar, :post_id, :deadline, :bug_type, :status, :user_id, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bug
+    @bug = Bug.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def bug_params
+    params.require(:bug).permit(:title, :description, :avatar, :post_id, :deadline,
+                                :bug_type, :status, :user_id, :project_id)
+  end
 end
