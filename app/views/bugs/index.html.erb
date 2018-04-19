@@ -20,12 +20,12 @@
     <tbody>
       <% @bugs.each do |bug| %>
         <tr>
-          <td><%= link_to "#{bug.title}", bug %></td>
+          <td> <strong><%= link_to "#{bug.title}", bug %></strong> </td>
           <td><%= bug.description %></td>
           <td><%= bug.deadline %></td>
           <td><%= bug.bug_type %></td>
           <td><%= bug.status %></td>
-          <td><%= bug.user.name %></td>
+          <td><%= bug.user.display_name %></td>
           <td><%= bug.project.name %></td>
           <td>
             <%= link_to 'View', bug %>
@@ -39,5 +39,5 @@
 
   <br>
 
-  <%= link_to 'New Bug', new_project_bug_path(@project.id) if policy(Bug).new? %>
+  <%= link_to 'Report Bug', new_project_bug_path(@project.id), class: 'btn btn-success' if policy(Bug).new? %>
 </div>

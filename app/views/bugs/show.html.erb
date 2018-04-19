@@ -1,5 +1,6 @@
 <div class="container">
   <p id="notice"><%= notice %></p>
+  <%= link_to 'Back', project_bugs_path(@project.id) %> |
   <%= link_to 'Edit', edit_bug_path(@bug) %>
   <h3>
     <strong>Title:</strong>
@@ -27,10 +28,21 @@
   </p>
 
   <p>
-    <strong>User ID:</strong>
-    <%= @bug.user.id %>
+    <strong>Created By:</strong>
+    <%= @bug.user.display_name %>
   </p>
-
+   <p>
+    <strong>Assigned to:</strong>
+    <% if @bug.assigned? %>
+      <%= @assigned_user.display_name %>
+    <% else %>
+      <% if policy(@bug).assign? %>
+        <%= link_to "Assign to me", assign_bug_path(@bug),method: :post, class: 'btn btn-info btn-sm'%>
+        <% else %>
+          Not yet assigned
+      <% end %>
+    <% end %>
+  </p>
   <p>
     <strong>Project:</strong>
     <%= @bug.project.name %>
@@ -41,12 +53,14 @@
     </p>
     <%= image_tag @bug.avatar_url(:thumb).to_s, class: 'img-thumbnail' %>
   <% end %>
-</div>
-<div class="container">
+  <hr>
   <div class="row">
-    <div class="col-md-6">
-      <h3>Know about this bug? Contribute</h3>
-      <%= link_to "Add Solution", new_project_bug_path(post_id: @bug.id, project_id: @bug.project_id) %>
+    <div class="col-md-3">
+      <% if @bug.is_feature? && @bug.resolved? %>
+          This Bug has been resolved.
+        <% else %>
+          <%= link_to "Resolve this bug", resolve_bug_path(@bug),method: :post, class: 'btn btn-success' %>
+      <% end %>
     </div>
   </div>
 </div>

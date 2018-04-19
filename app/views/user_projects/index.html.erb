@@ -16,11 +16,11 @@
       <% @users.each do |user| %>
         <% @user_project = UserProject.where(user_id: user.id, project_id: @project.id).first %>
         <tr>
-          <td><%= user.name %></td>
+          <td><%= user.display_name %></td>
           <td><%= user.email %></td>
           <td><%= user.user_type %></td>
           <td>
-            <%= link_to 'Remove', @user_project, method: :delete, data: { confirm: 'Are you sure?' } if user.user_type != "manager" %>
+            <%= link_to 'Remove', @user_project, method: :delete, data: { confirm: 'Are you sure?' } if !user.manager? %>
           </td>
         </tr>
       <% end %>

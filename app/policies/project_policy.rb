@@ -1,10 +1,10 @@
 class ProjectPolicy < ApplicationPolicy
   def destroy?
-    user.user_type == "manager"
+    user.manager?
   end
 
   def update?
-    user.user_type == "manager"
+    user.manager?
   end
 
   # class Scope

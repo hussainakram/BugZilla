@@ -4,6 +4,10 @@ Rails.application.routes.draw do
       get  'users', to: 'user_projects#index', as: 'users'
       resources :user_projects, only: [:destroy]
       resources :bugs do
+        member do
+          post :assign
+          post :resolve
+        end
         get '/add_comment', to: "bug#add_comment"
       end
     end

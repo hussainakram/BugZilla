@@ -10,4 +10,17 @@ class Bug < ApplicationRecord
   belongs_to :project
   belongs_to :post, class_name: 'Bug'
   has_many :comment, class_name: 'Bug', foreign_key: 'post_id'
+
+  def assigned?
+    return self.assign_to.present?
+  end
+  def is_feature?
+    bug_type == "feature"
+  end
+  def is_bug?
+    bug_type == "bug"
+  end
+  def resolved?
+    status == "Resolved" || status == "Completed"
+  end
 end

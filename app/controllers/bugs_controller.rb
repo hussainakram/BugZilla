@@ -1,5 +1,6 @@
 class BugsController < ApplicationController
   before_action :set_bug, only: [:show, :edit, :update, :destroy]
+  # after_action :verify_authorized, except: :index
 
   # GET /bugs
   # GET /bugs.json
@@ -13,6 +14,7 @@ class BugsController < ApplicationController
   def show
     @bug = Bug.find(params[:id])
     @project = Project.find(@bug.project_id)
+    @assigned_user = User.find @bug.assign_to if @bug.assign_to.present?
   end
 
   # GET /bugs/new
@@ -48,7 +50,6 @@ class BugsController < ApplicationController
   # PATCH/PUT /bugs/1
   # PATCH/PUT /bugs/1.json
   def update
-    authorize @bug
     respond_to do |format|
       if @bug.update(bug_params)
         format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
@@ -71,6 +72,29 @@ class BugsController < ApplicationController
   end
 
   def add_comment
+  end
+
+  def assign
+    @bug = Bug.find(params[:id])
+    @bug.update_column(:assign_to, current_user.id)
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Bug was has been assigned to you!' }
+      format.json { head :no_content }
+    end
+  end
+
+  def resolve
+    @bug = Bug.find(params[:id])
+    authorize @bug
+    if @bug.is_feature?
+      @bug.update_column(:status, "Completed")
+    elsif bug.is_bug?
+      @bug.update_column(:status, "Resolved")
+    end
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Bug was has been resolved by you!' }
+      format.json { head :no_content }
+    end
   end
 
   private

@@ -18,7 +18,7 @@
     <tbody>
       <% @user.projects.each do |project| %>
         <tr>
-          <td><%= project.name %></td>
+          <td><strong><%= link_to "#{project.name}", project %></strong></td>
           <td><%= project.description %></td>
           <td><%= link_to image_tag('bug.png', class: 'bug-image'), project_bugs_path(project) %></td>
           <td>
@@ -27,7 +27,7 @@
             <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if policy(project).destroy? %>
           </td>
           <td> <%= link_to "", project_users_path(project.id), class: 'fa fa-users fa-lg' %> </td>
-          <td><%= link_to_if current_user.user_type == "manager", "Invite User", new_user_invitation_path(project_id: project.id) %></td>
+          <td><%= link_to_if current_user.manager?, "Invite User", new_user_invitation_path(project_id: project.id) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -35,5 +35,5 @@
 
   <br>
 
-  <%= link_to 'New Project', new_project_path, class: 'btn btn-warning' %>
+  <%= link_to 'New Project', new_project_path, class: 'btn btn-success' %>
 </div>

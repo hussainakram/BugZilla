@@ -14,11 +14,16 @@ class BugPolicy < ApplicationPolicy
        end
      end
    end
-
+  def assign?
+    user.developer?
+  end
   def destroy?
-    user.user_type == "manager" or user.user_type == "qa"
+    user.manager? or user.qa?
   end
   def new?
-    user.user_type == "manager" or user.user_type == "qa"
+    user.manager? or user.qa?
+  end
+  def resolve?
+    user.developer?
   end
 end
