@@ -17,12 +17,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import "font-awesome";
 
 
 .brand-logo {
   height: 53px;
 }
 
+#notice {
+  color: green;
+}
 
 .table-info {
   background-color: #0184a069 !important;

@@ -1,7 +1,6 @@
 class User < ApplicationRecord
-  enum user_type: [:manager, :developer, :qa]
 
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :user_projects

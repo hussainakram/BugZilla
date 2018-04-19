@@ -1,0 +1,30 @@
+  <div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1>Users</h1>
+
+  <table class="table table-responsive">
+    <thead class= "table-info">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>User Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <% @user_project = UserProject.where(user_id: user.id, project_id: @project.id).first %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.user_type %></td>
+          <td>
+            <%= link_to 'Remove', @user_project, method: :delete, data: { confirm: 'Are you sure?' } if user.user_type != "manager" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>

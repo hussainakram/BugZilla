@@ -1,7 +1,6 @@
-<h1>Editing Bug</h1>
-
   <div class="container">
-    <%= form_for [@project, @bug] do |f| %>
+    <h1>Editing Bug</h1>
+    <%= form_for [@bug], html: { multipart: true } do |f| %>
     <% if @bug.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
@@ -26,6 +25,13 @@
         <%= f.text_area :description, class: 'form-control' %>
       </div>
     </div>
+
+    <div class="row">
+    <div class="field form-group col-md-3">
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar, class: 'form-control' %>
+    </div>
+  </div>
 
     <div class="row">
       <div class="field form-group col-md-2">
@@ -55,13 +61,14 @@
     </div>
 
     <div class="row">
-      <div class="field form-group col-md-4">
+      <div class="field form-group col-md-1">
+        <%= f.label :project_id %>
         <%= f.number_field :project_id, readonly: true , class: 'form-control' %>
       </div>
     </div>
 
     <div class="actions">
-      <%= f.submit "Create", class: 'btn btn-primary' %>
+      <%= f.submit "Update Project", class: 'btn btn-primary' %>
     </div>
   <% end %>
 

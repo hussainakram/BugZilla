@@ -13,6 +13,11 @@
       </div>
 
       <div class="field form-group">
+        <%= f.label :user_type %><br />
+        <%= f.select(:user_type, options_for_select([['Developer', 'developer'], ['Manager', 'manager'], ['QA', 'qa']]), {}) %>
+      </div>
+
+      <div class="field form-group">
         <%= f.label :password %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>

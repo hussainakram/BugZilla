@@ -1,9 +1,11 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  # after_action :verify_authorized, except: :index
+  # after_action :verify_policy_scoped, except: :index
   # GET /projects
   # GET /projects.json
   def index
+    @user = current_user
     @projects = Project.all
   end
 

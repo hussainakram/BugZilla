@@ -11,17 +11,22 @@ class BugsController < ApplicationController
   # GET /bugs/1
   # GET /bugs/1.json
   def show
-    @bug = Bug.where(params[:id]).first
+    @bug = Bug.find(params[:id])
+    @project = Project.find(@bug.project_id)
   end
 
   # GET /bugs/new
   def new
     @project = Project.find(params[:project_id])
     @bug = @project.bugs.new
+    if params[:post_id].present?
+      @bug.post_id = params[:bug_id]
+    end
   end
 
   # GET /bugs/1/edit
   def edit
+    @bug = Bug.find(params[:id])
   end
 
   # POST /bugs
@@ -29,7 +34,6 @@ class BugsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     @bug = @project.bugs.new(bug_params)
-
     respond_to do |format|
       if @bug.save
         format.html { redirect_to project_bugs_path(@project.id), notice: 'Bug was successfully created.' }
@@ -44,6 +48,7 @@ class BugsController < ApplicationController
   # PATCH/PUT /bugs/1
   # PATCH/PUT /bugs/1.json
   def update
+    authorize @bug
     respond_to do |format|
       if @bug.update(bug_params)
         format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
@@ -60,9 +65,12 @@ class BugsController < ApplicationController
   def destroy
     @bug.destroy
     respond_to do |format|
-      format.html { redirect_to bugs_url, notice: 'Bug was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Bug was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_comment
   end
 
   private
@@ -73,6 +81,6 @@ class BugsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bug_params
-      params.require(:bug).permit(:title, :description, :deadline, :bug_type, :status, :user_id, :project_id)
+      params.require(:bug).permit(:title, :description, :avatar, :post_id, :deadline, :bug_type, :status, :user_id, :project_id)
     end
 end
