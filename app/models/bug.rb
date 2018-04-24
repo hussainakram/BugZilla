@@ -2,7 +2,7 @@ class Bug < ApplicationRecord
   attr_accessor :avatar, :remote_avatar_url
   mount_uploader :avatar, AvatarUploader
   serialize :avatars, JSON
-  validates :title, presence: true
+  validates :title, uniqueness: true, presence: true
   validates :bug_type, presence: true
   validates :status, presence: true
 
