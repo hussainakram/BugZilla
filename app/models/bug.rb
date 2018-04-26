@@ -9,7 +9,7 @@ class Bug < ApplicationRecord
   belongs_to :user
   belongs_to :project
   belongs_to :post, class_name: 'Bug'
-  has_many :comment, class_name: 'Bug', foreign_key: 'post_id', dependent: :destroy, inverse_of: :bug
+  has_many :comment, class_name: 'Bug', foreign_key: 'post_id', dependent: :destroy
 
   def assigned?
     assign_to.present?

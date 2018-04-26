@@ -64,7 +64,7 @@ class BugsController < ApplicationController
   def destroy
     @bug.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Bug was successfully destroyed.' }
+      format.html { redirect_to projects_path(@bug.project_id), notice: 'Bug was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -57,7 +57,7 @@
   <div class="row bug_status">
     <div class="field form-group col-md-2">
       <%= f.label :bug_status %>
-      <%= f.select(:status, options_for_select([['New', 'new'], ['Started', 'started'], ['Resolved', 'resolved']]), {}, {class: "form-control"}) %>
+      <%= f.select(:status, options_for_select([['New', 'new'], ['Started', 'started'], ['Resolved', 'resolved']]), {}, {class: "form-control", id: 'bug_bug_status'}) %>
     </div>
   </div>
   <div class="row">

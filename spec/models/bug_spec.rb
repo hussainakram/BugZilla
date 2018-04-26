@@ -13,4 +13,22 @@ RSpec.describe Bug, type: :model do
     it { should belong_to(:user) }
     it { should belong_to(:project) }
   end
+
+  context "Instance methods" do
+    user = FactoryBot.create(:user, user_type: "manager")
+      project = user.projects.create(name: Faker::Name.title, description: Faker::Lorem.sentence, user_id: user.id)
+      bug = project.bugs.create(
+        title: Faker::Science.element,
+        description: Faker::Lorem.sentences,
+        deadline: Faker::Date.between_except(1.year.ago, 1.year.from_now, Date.today),
+        bug_type: "feature",
+        status: "Started",
+        user_id: user.id
+      )
+     bug.update_attribute(:bug_type, "bug")
+     bug.save
+     it "is_bug?" do
+       expect(bug.is_bug?).to be_truthy
+     end
+  end
 end
