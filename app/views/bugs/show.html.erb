@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-5">
       <p id="notice"><%= notice %></p>
       <%= link_to 'Back', project_bugs_path(@project.id) %> |
       <%= link_to 'Edit', edit_bug_path(@bug) %>
@@ -66,24 +66,29 @@
     </div>
     <div class="col-md-4">
        <h3><%= link_to "Show Audits", "#", class: "bug_audits_btn btn btn-info" %></h3>
-        <table class="table table-striped" id="bug_audits">
-          <thead>
-            <tr>
-              <th>Action Performed</th>
-              <th>Changed Attribute </th>
-              <th>Modifier</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @audits.each do |a| %>
-            <tr>
-              <td><%= a.action_performed %></td>
-              <td><%= a.changed_attribute %></td>
-              <td><%= User.find(a.user_id).display_name %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div id="bug_audits">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Action Performed</th>
+                <th>Changed Attribute </th>
+                <th>Modifier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @audits.each do |a| %>
+              <tr>
+                <td><%= a.id %></td>
+                <td><%= a.action_performed %></td>
+                <td><%= a.changed_attribute %></td>
+                <td><%= User.find(a.user_id).display_name %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to "Hide", "#", class: "hide_bug_audits_btn btn-xs btn btn-danger pull-right" %>
+        </div>
       </div>
     </div>
   </div>

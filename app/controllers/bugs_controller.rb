@@ -20,6 +20,7 @@ class BugsController < ApplicationController
 
   # GET /bugs/new
   def new
+    @user = current_user
     @project = Project.find(params[:project_id])
     @bug = @project.bugs.new
     @bug.post_id = params[:bug_id] if params[:post_id].present?
@@ -34,6 +35,7 @@ class BugsController < ApplicationController
   # POST /bugs
   # POST /bugs.json
   def create
+    @user = current_user
     @project = Project.find(params[:project_id])
     @bug = @project.bugs.new(bug_params)
     respond_to do |format|

@@ -30,3 +30,5 @@ $ ->
   $('#bug_audits').hide()
   $('.bug_audits_btn').click ->
     $('#bug_audits').show()
+  $('.hide_bug_audits_btn').click ->
+    $('#bug_audits').hide()

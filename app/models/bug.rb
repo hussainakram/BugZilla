@@ -1,6 +1,6 @@
 class Bug < ApplicationRecord
   attr_accessor :avatar, :remote_avatar_url
-  before_create -> { save_audit("Create") }
+  after_create -> { save_audit("Create") }
   before_update -> { save_audit("Update") }
   before_destroy -> { save_audit("Destroy") }
 
