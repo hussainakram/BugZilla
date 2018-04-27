@@ -25,3 +25,8 @@ $ ->
     else if bug_types == 'Feature'
       $('.bug_status').hide()
       $('.feature_status').show()
+
+$ ->
+  $('#bug_audits').hide()
+  $('.bug_audits_btn').click ->
+    $('#bug_audits').show()

@@ -15,6 +15,7 @@ class BugsController < ApplicationController
     @bug = Bug.find(params[:id])
     @project = Project.find(@bug.project_id)
     @assigned_user = User.find @bug.assign_to if @bug.assign_to.present?
+    @audits = @bug.audits if @bug.audits
   end
 
   # GET /bugs/new
@@ -26,6 +27,7 @@ class BugsController < ApplicationController
 
   # GET /bugs/1/edit
   def edit
+    @user = current_user
     @bug = Bug.find(params[:id])
   end
 

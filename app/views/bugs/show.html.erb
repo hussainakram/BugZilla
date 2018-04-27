@@ -1,66 +1,89 @@
 <div class="container">
-  <p id="notice"><%= notice %></p>
-  <%= link_to 'Back', project_bugs_path(@project.id) %> |
-  <%= link_to 'Edit', edit_bug_path(@bug) %>
-  <h3>
-    <strong>Title:</strong>
-    <%= @bug.title %>
-  </h3>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @bug.description %>
-  </p>
-
-  <p>
-    <strong>Deadline:</strong>
-    <%= @bug.deadline %>
-  </p>
-
-  <p>
-    <strong>Type:</strong>
-    <%= @bug.bug_type %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= @bug.status %>
-  </p>
-
-  <p>
-    <strong>Created By:</strong>
-    <%= @bug.user.display_name %>
-  </p>
-   <p>
-    <strong>Assigned to:</strong>
-    <% if @bug.assigned? %>
-      <%= @assigned_user.display_name %>
-    <% else %>
-      <% if policy(@bug).assign? %>
-        <%= link_to "Assign to me", assign_bug_path(@bug),method: :post, class: 'btn btn-info btn-sm'%>
-        <% else %>
-          Not yet assigned
-      <% end %>
-    <% end %>
-  </p>
-  <p>
-    <strong>Project:</strong>
-    <%= @bug.project.name %>
-  </p>
-  <% if @bug.avatar.present? %>
-    <p>
-      <strong>Image:</strong>
-    </p>
-    <%= image_tag @bug.avatar_url(:thumb).to_s, class: 'img-thumbnail' %>
-  <% end %>
-  <hr>
   <div class="row">
-    <div class="col-md-3">
-      <% if @bug.is_feature? && @bug.resolved? %>
-          This Bug has been resolved.
+    <div class="col-md-8">
+      <p id="notice"><%= notice %></p>
+      <%= link_to 'Back', project_bugs_path(@project.id) %> |
+      <%= link_to 'Edit', edit_bug_path(@bug) %>
+      <h3>
+        <strong>Title:</strong>
+        <%= @bug.title %>
+      </h3>
+
+      <p>
+        <strong>Description:</strong>
+        <%= @bug.description %>
+      </p>
+
+      <p>
+        <strong>Deadline:</strong>
+        <%= @bug.deadline %>
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+        <%= @bug.bug_type %>
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+        <%= @bug.status %>
+      </p>
+
+      <p>
+        <strong>Created By:</strong>
+        <%= @bug.user.display_name %>
+      </p>
+       <p>
+        <strong>Assigned to:</strong>
+        <% if @bug.assigned? %>
+          <%= @assigned_user.display_name %>
         <% else %>
-          <%= link_to "Resolve this bug", resolve_bug_path(@bug),method: :post, class: 'btn btn-success' %>
+          <% if policy(@bug).assign? %>
+            <%= link_to "Assign to me", assign_bug_path(@bug),method: :post, class: 'btn btn-info btn-sm'%>
+            <% else %>
+              Not yet assigned
+          <% end %>
+        <% end %>
+      </p>
+      <p>
+        <strong>Project:</strong>
+        <%= @bug.project.name %>
+      </p>
+      <% if @bug.avatar.present? %>
+        <p>
+          <strong>Image:</strong>
+        </p>
+        <%= image_tag @bug.avatar_url(:thumb).to_s, class: 'img-thumbnail' %>
       <% end %>
+      <hr>
+      <div class="col-md-3">
+        <% if @bug.is_feature? && @bug.resolved? %>
+            This Bug has been resolved.
+          <% else %>
+            <%= link_to "Resolve this bug", resolve_bug_path(@bug),method: :post, class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+       <h3><%= link_to "Show Audits", "#", class: "bug_audits_btn btn btn-info" %></h3>
+        <table class="table table-striped" id="bug_audits">
+          <thead>
+            <tr>
+              <th>Action Performed</th>
+              <th>Changed Attribute </th>
+              <th>Modifier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @audits.each do |a| %>
+            <tr>
+              <td><%= a.action_performed %></td>
+              <td><%= a.changed_attribute %></td>
+              <td><%= User.find(a.user_id).display_name %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
