@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426134447) do
+ActiveRecord::Schema.define(version: 20180427073000) do
 
   create_table "audits", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20180426134447) do
     t.integer  "version"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "previous_value"
     t.index ["bug_id"], name: "index_audits_on_bug_id"
     t.index ["user_id"], name: "index_audits_on_user_id"
   end
@@ -50,6 +51,15 @@ ActiveRecord::Schema.define(version: 20180426134447) do
     t.integer  "user_id"
     t.index ["name"], name: "index_projects_on_name", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "sprints", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sprints_on_user_id"
   end
 
   create_table "user_projects", force: :cascade do |t|

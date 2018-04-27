@@ -64,7 +64,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
        <h3><%= link_to "Show Audits", "#", class: "bug_audits_btn btn btn-info" %></h3>
         <div id="bug_audits">
           <table class="table table-striped">
@@ -73,6 +73,7 @@
                 <th>#</th>
                 <th>Action Performed</th>
                 <th>Changed Attribute </th>
+                <th>Previous value</th>
                 <th>Modifier</th>
               </tr>
             </thead>
@@ -82,6 +83,7 @@
                 <td><%= a.id %></td>
                 <td><%= a.action_performed %></td>
                 <td><%= a.changed_attribute %></td>
+                <th><%= a.previous_value %></th>
                 <td><%= User.find(a.user_id).display_name %></td>
               </tr>
               <% end %>
