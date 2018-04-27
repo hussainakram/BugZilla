@@ -8,6 +8,7 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Sprints</th>
         <th>Bugs</th>
         <th>Actions</th>
         <th>Users</th>
@@ -20,6 +21,7 @@
         <tr>
           <td><strong><%= link_to "#{project.name}", project %></strong></td>
           <td><%= project.description %></td>
+          <td><%= link_to image_tag('sprint-img.png', class: 'bug-image'), project_sprints_path(project) %></td>
           <td><%= link_to image_tag('bug.png', class: 'bug-image'), project_bugs_path(project) %></td>
           <td>
             <%= link_to 'Show', project, class: 'btn btn-xs btn-default' %>

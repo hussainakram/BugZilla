@@ -41,18 +41,18 @@ gem 'font-awesome-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'rubocop'
-  gem 'rspec-rails', '~> 3.4'
-  gem "factory_bot_rails", "~> 4.0"
   gem 'capybara'
-  gem 'faker', git: 'https://github.com/stympy/faker.git', branch:'master'
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'minitest'
-  gem 'shoulda-matchers', '~> 2.5.0'
   gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'rubocop'
+  gem 'shoulda-matchers', '~> 2.5.0'
 end
 
 group :test do
-  gem "database_cleaner"
+  gem 'database_cleaner'
 end
 
 group :development do

@@ -74,6 +74,7 @@
                 <th>Action Performed</th>
                 <th>Changed Attribute </th>
                 <th>Previous value</th>
+                <th>New value</th>
                 <th>Modifier</th>
               </tr>
             </thead>
@@ -84,6 +85,7 @@
                 <td><%= a.action_performed %></td>
                 <td><%= a.changed_attribute %></td>
                 <th><%= a.previous_value %></th>
+                <th><%= a.new_value %></th>
                 <td><%= User.find(a.user_id).display_name %></td>
               </tr>
               <% end %>

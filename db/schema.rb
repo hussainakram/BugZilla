@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427073000) do
+ActiveRecord::Schema.define(version: 20180427115354) do
 
   create_table "audits", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180427073000) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "previous_value"
+    t.string   "new_value"
     t.index ["bug_id"], name: "index_audits_on_bug_id"
     t.index ["user_id"], name: "index_audits_on_user_id"
   end
@@ -38,7 +39,9 @@ ActiveRecord::Schema.define(version: 20180427073000) do
     t.string   "avatar"
     t.string   "post_id"
     t.integer  "assign_to"
+    t.integer  "sprint_id"
     t.index ["project_id"], name: "index_bugs_on_project_id"
+    t.index ["sprint_id"], name: "index_bugs_on_sprint_id"
     t.index ["title"], name: "index_bugs_on_title", unique: true
     t.index ["user_id"], name: "index_bugs_on_user_id"
   end
@@ -57,8 +60,11 @@ ActiveRecord::Schema.define(version: 20180427073000) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "user_id"
+    t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
+    t.index ["project_id"], name: "index_sprints_on_project_id"
     t.index ["user_id"], name: "index_sprints_on_user_id"
   end
 

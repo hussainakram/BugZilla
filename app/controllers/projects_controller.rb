@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[edit update destroy]
   # after_action :verify_authorized, except: :index
   # after_action :verify_policy_scoped, except: :index
   # GET /projects

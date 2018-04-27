@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
+
   shallow do
     resources :projects do
       get 'users', to: 'user_projects#index', as: 'users'
       resources :user_projects, only: [:destroy]
+      resources :sprints do
+        member do
+          post :add_bug_to
+          post :remove_bug_from
+        end
+      end
       resources :bugs do
         member do
           post :assign

@@ -1,0 +1,59 @@
+<div class="container">
+  <h3>Sprint Bugs</h3>
+  <div class="row">
+    <div class="col-md-5">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Bug Type</th>
+            <th>Status</th>
+            <th>Deadline</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @added_bugs.each do |bug| %>
+          <tr>
+            <td><%= bug.title %></td>
+            <td><%= bug.bug_type %></td>
+            <th><%= bug.status %></th>
+            <td><%= bug.deadline %></td>
+            <td><%= link_to "Remove", remove_bug_from_sprint_path(id: bug.id, sprint_id: @sprint.id), method: :post, class: 'btn btn-xs btn-danger' %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h3>Unadded bugs</h3>
+  <div class="row">
+    <div class="col-md-5">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Bug Type</th>
+            <th>Status</th>
+            <th>Deadline</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @unadded_bugs.each do |bug| %>
+          <tr>
+            <td><%= bug.title %></td>
+            <td><%= bug.bug_type %></td>
+            <th><%= bug.status %></th>
+            <td><%= bug.deadline %></td>
+            <td><%= link_to "Add", add_bug_to_sprint_path(id: bug.id, sprint_id: @sprint.id), method: :post, class: 'btn btn-xs btn-success' %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

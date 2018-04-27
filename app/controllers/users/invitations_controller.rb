@@ -1,5 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
-  after_action :add_user_to_project, only: [:create]
+  after_action :add_user_to_project
   before_action :update_sanitized_params, only: :update
 
   # PUT /resource/invitation

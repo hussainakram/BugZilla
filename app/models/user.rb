@@ -4,10 +4,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates :email, uniqueness: true, presence: true
 
-  has_many :audits
+  has_many :audits, dependent: :destroy
+  has_many :sprints, dependent: :destroy
   has_many :user_projects, dependent: :destroy
   has_many :projects, through: :user_projects
-
 
   def self.current
     Thread.current[:user]
